@@ -5,10 +5,10 @@
 <configuration>
     <!--配置别名-->
     <typeAliases>
-        <typeAlias alias="User" type="endorphin.domain.User"/>
-        <typeAlias alias="Board" type="endorphin.domain.Board"/>
-        <typeAlias alias="UserLoginLog" type="endorphin.domain.UserLoginLog"/>
-        <typeAlias alias="Post" type="endorphin.domain.Post"/>
-        <typeAlias alias="Reply" type="endorphin.domain.Reply"/>
+        <typeAlias alias="User" type="forum.domain.User"/>
+        <typeAlias alias="Board" type="forum.domain.Board"/>
+        <typeAlias alias="UserLoginLog" type="forum.domain.UserLoginLog"/>
+        <typeAlias alias="Post" type="forum.domain.Post"/>
+        <typeAlias alias="Reply" type="forum.domain.Reply"/>
     </typeAliases>
 </configuration>
