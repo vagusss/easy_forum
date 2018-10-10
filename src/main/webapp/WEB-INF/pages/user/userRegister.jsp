@@ -1,8 +1,3 @@
-<%--
-  User: igaozp
-  Date: 2018/5/9
-  Time: 20:14
---%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -11,13 +6,13 @@
 
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
 
-    <title>Endorphin - 注册</title>
+    <title>easy_forum - 注册</title>
 </head>
 <body>
 <%-- 注册页面导航栏 --%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand text-white ml-lg-5" href="/">
-        Endorphin
+        简易论坛
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -47,14 +42,17 @@
                     <label for="userName">用户名</label>
                     <input type="text" class="form-control" id="userName" name="userName"
                            aria-describedby="userNameHelp" placeholder="输入用户名">
+                    <span id="username-span">${userName_error}</span>
                 </div>
                 <div class="form-group">
                     <label for="userEmail">邮箱</label>
                     <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="输入邮箱">
+                    <span id="email-span">${userEmail_error}</span>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="输入密码">
+                    <span id="password-span">${password_error}</span>
                 </div>
                 <button type="submit" class="btn btn-primary">注册</button>
                 <a href="/userLogin" class="btn btn-secondary ml-3">登录</a>

@@ -2,16 +2,22 @@ package forum.controller;
 
 import forum.domain.User;
 import forum.domain.UserLoginLog;
+import forum.group.ValidGroup1;
+import forum.group.ValidGroup2;
 import forum.service.LoginLogService;
 import forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -27,7 +33,18 @@ public class UserController {
 
     //用户登录
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String userLogin(User loginUser, HttpServletRequest request) {
+    public String userLogin(@Validated(value={ValidGroup1.class}) User loginUser, BindingResult bindingResult, HttpServletRequest request) {
+        //校验登录时输入的用户名和密码
+        if (bindingResult.hasErrors()){
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError: fieldErrors){
+//                System.out.println(fieldError.getField());
+//                System.out.println(fieldError.getDefaultMessage());
+                request.setAttribute(fieldError.getField()+"_error",fieldError.getDefaultMessage());
+            }
+            return "user/userLogin";
+        }
+
         // 通过用户名查找User对象
         User user = userService.getUserByUserName(loginUser.getUserName());
         String password = "";
@@ -68,7 +85,18 @@ public class UserController {
 
     //用户注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String userRegister(User userRegister, HttpServletRequest request) {
+    public String userRegister(@Validated(value={ValidGroup2.class}) User userRegister, BindingResult bindingResult, HttpServletRequest request) {
+        //校验注册时输入的用户名和密码
+        if (bindingResult.hasErrors()){
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError: fieldErrors){
+                request.setAttribute(fieldError.getField()+"_error",fieldError.getDefaultMessage());
+            }
+            return "user/userRegister";
+        }
+
+
+
         User user = userRegister;
         if (user != null) {
             try {

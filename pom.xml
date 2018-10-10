@@ -119,6 +119,15 @@
       <artifactId>standard</artifactId>
       <version>LATEST</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+    <!--数据校验-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.4.1.Final</version>
+    </dependency>
+
   </dependencies>
 
   <build>

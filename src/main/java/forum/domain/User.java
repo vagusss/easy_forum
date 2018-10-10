@@ -1,5 +1,10 @@
 package forum.domain;
 
+import forum.group.ValidGroup1;
+import forum.group.ValidGroup2;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -18,9 +23,14 @@ public class User implements Serializable {
      * 用户的基本属性
      */
     private int userId;
+
+    @NotBlank(message = "{user.username.isnull}",groups={ValidGroup1.class, ValidGroup2.class})
     private String userName;
+    @NotBlank(message = "{user.password.isnull}",groups={ValidGroup1.class, ValidGroup2.class})
     private String password;
     private int userPhone;
+    @Email(message = "{user.email.notformat}")
+    @NotBlank(message = "{user.email.isnull}",groups={ValidGroup2.class})
     private String userEmail;
     private String userSex;
     private Timestamp createTime;
