@@ -117,7 +117,7 @@
                         <li><a href="#">GitHub</a></li>
                         <li><a href="#">Privacy & Terms</a></li>
                         <div align="right">
-                            <li><a href="/">你们搞的这个网站, excited!</a></li>
+                            <li><a href="/">关于</a></li>
                         </div>
                     </ul>
                 </div>

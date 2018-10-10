@@ -15,11 +15,82 @@ public class MainController {
     @Autowired
     private BoardService boardService;
 
+    //主页
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
 
+    //显示板块主页
     @RequestMapping("/main")
     public String mainPage(HttpServletRequest request) {
         List<Board> boards = boardService.listAllBoard();
         request.setAttribute("board", boards);
         return "mainPage";
     }
+
+    //登录页面
+    @RequestMapping("/userLogin")
+    public String userLogin() {
+        return "user/userLogin";
+    }
+
+    //注册页面
+    @RequestMapping("/userRegister")
+    public String userRegister() {
+        return "user/userRegister";
+    }
+
+    //显示添加文章的页面
+    @RequestMapping("addPost")
+    public String addPost(String userName, String boardId, HttpServletRequest request) {
+        if (userName != null && boardId != null) {
+            request.setAttribute("username", userName);
+            request.setAttribute("boardId", boardId);
+
+            return "/post/addPost";
+        }
+
+        return "redirect:/error";
+    }
+
+    //显示添加回复的页面
+    @RequestMapping("addReply")
+    public String addReply(int replyPostId, String replyUserName, HttpServletRequest request) {
+        if (replyPostId > 0 && replyUserName != null) {
+            request.setAttribute("replyPostId", replyPostId);
+            request.setAttribute("replyUserName", replyUserName);
+
+            return "reply/reply";
+        }
+        return "redirect:/error";
+    }
+
+    //显示添加板块的页面
+    @RequestMapping(value = "addBoard")
+    public String addBoardPage() {
+        return "/admin/addBoard";
+    }
+
+    //显示板块
+    @RequestMapping(value = "updateBoardPage")
+    public String updateBoardPage(int boardId, HttpServletRequest request) {
+        Board board = boardService.intoBoardByBoardId(boardId);
+        if (board != null) {
+            request.setAttribute("boardName", board.getBoardName());
+            request.setAttribute("boardDesc", board.getBoardDesc());
+            request.setAttribute("boardId", board.getBoardId());
+            request.setAttribute("boardPostNum", board.getBoardPostNum());
+            return "/admin/updateBoard";
+        }
+
+        return "/admin/updateBoard";
+    }
+
+    //返回错误页面
+    @RequestMapping(value = "error")
+    public String error() {
+        return "error";
+    }
+
 }
