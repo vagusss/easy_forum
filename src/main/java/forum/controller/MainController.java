@@ -1,6 +1,10 @@
 package forum.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import forum.domain.Board;
 import forum.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,10 @@ public class MainController {
     @Autowired
     private BoardService boardService;
 
+//    @Autowired
+//    ObjectMapper mapper;
+
+
     //主页
     @RequestMapping("/")
     public String index() {
@@ -23,8 +31,11 @@ public class MainController {
 
     //显示板块主页
     @RequestMapping("/main")
-    public String mainPage(HttpServletRequest request) {
+    public String mainPage(HttpServletRequest request) throws JsonProcessingException {
+//        PageHelper.startPage(2, 1);
         List<Board> boards = boardService.listAllBoard();
+//        PageInfo<Board> pageInfo = new PageInfo<>(boards);
+//        mapper.writeValueAsString(pageInfo);
         request.setAttribute("board", boards);
         return "mainPage";
     }

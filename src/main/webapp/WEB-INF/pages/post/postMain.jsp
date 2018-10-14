@@ -5,8 +5,10 @@
     <title>版块内容</title>
     <link rel="stylesheet" href="../../resources/css/material-icons.css">
     <link rel="stylesheet" href="../../resources/css/material.min.css">
+    <link rel="stylesheet" href="../../resources/bootstrap/css/bootstrap.css">
     <script type="text/javascript" src="../../resources/js/material.min.js"></script>
     <script type="text/javascript" src="../../resources/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../../resources/bootstrap/js/bootstrap.js"></script>
     <style>
         .card-width {
             width: 600px;
@@ -53,7 +55,7 @@
     </header>
     <main class="mdl-layout__content">
         <div class="page-content">
-            <c:forEach items="${board.posts}" var="post" varStatus="status">
+            <c:forEach items="${pageInfo.list}" var="post" varStatus="status">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--3-col"></div>
                     <div class="mdl-cell mdl-cell--6-col">
@@ -90,6 +92,36 @@
             </c:forEach>
         </div>
     </main>
+
+    <%--分页模块--%>
+    <nav aria-label="..." class="center">
+        <ul class="pagination">
+            <li class="page-item ">
+                <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.prePage}" tabindex="-1">Previous</a>
+            </li>
+            <c:if test="${pageInfo.pageNum-1 gt 0}">
+            <li class="page-item ">
+                <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.pageNum-1}">${pageInfo.pageNum-1}</a>
+            </li>
+            </c:if>
+            <li class="page-item ">
+                <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.pageNum}">${pageInfo.pageNum} <span class="sr-only">(current)</span></a>
+            </li>
+            <c:if test="${pageInfo.pageNum+1 le pageInfo.lastPage}">
+            <li class="page-item">
+                <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.pageNum+1}">${pageInfo.pageNum+1}</a>
+            </li>
+            </c:if>
+            <li class="page-item">
+                <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.nextPage}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+
+    </script>
+
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package forum.dao;
 
 import forum.domain.Board;
+import forum.domain.Post;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +29,8 @@ public interface BoardDao {
      * @param boardId 指定的板块 id
      * @return 文章列表
      */
-    Board listAllPostsOfBoard(int boardId);
+//    Board listAllPostsOfBoard(int boardId);
+    List<Post> listAllPostsOfBoard(int boardId);
 
     /**
      * 通过主题板块 id 查找板块

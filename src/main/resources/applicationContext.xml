@@ -49,4 +49,6 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+    <bean id="mapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
 </beans>

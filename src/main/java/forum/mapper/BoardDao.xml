@@ -31,6 +31,21 @@
         </collection>
     </resultMap>
 
+    <resultMap id="allPosts" type="Post">
+        <id property="postId" column="post_id"/>
+        <result property="postBoardId" column="post_board_id"/>
+        <result property="postUserName" column="post_user_name"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postGoodCount" column="post_good_count"/>
+        <result property="postBadCount" column="post_bad_count"/>
+        <result property="postViewCount" column="post_view_count"/>
+        <result property="postReplyCount" column="post_reply_count"/>
+        <result property="postStatus" column="post_status"/>
+        <result property="postCreateTime" column="post_create_time"/>
+        <result property="postUpdateTime" column="post_update_time"/>
+    </resultMap>
+
     <sql id="boardColumns">
       board_id,board_name,board_desc,board_post_num
     </sql>
@@ -57,10 +72,15 @@
     </select>
 
     <!--显示板块中的帖子-->
-    <select id="listAllPostsOfBoard" resultMap="boardAndPostMap">
+    <!--<select id="listAllPostsOfBoard" resultMap="boardAndPostMap">
         SELECT *
         FROM board B, post P
         WHERE B.board_id = P.post_board_id AND B.board_id = #{boardId}
+    </select>-->
+    <select id="listAllPostsOfBoard" parameterType="int" resultMap="allPosts">
+        SELECT *
+        FROM post P
+        WHERE P.post_board_id = #{boardId}
     </select>
 
     <!--添加新板块-->

@@ -1,6 +1,7 @@
 package forum.service;
 
 import forum.domain.Board;
+import forum.domain.Post;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public interface BoardService {
 
 //获取指定板块的文章
 
-    Board listAllPostOfBoard(int boardId);
+//    Board listAllPostOfBoard(int boardId);
+List<Post> listAllPostOfBoard(int boardId);
 
 //通过 id 获取板块
 

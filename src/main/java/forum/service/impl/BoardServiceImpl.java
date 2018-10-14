@@ -2,6 +2,7 @@ package forum.service.impl;
 
 import forum.dao.BoardDao;
 import forum.domain.Board;
+import forum.domain.Post;
 import forum.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board listAllPostOfBoard(int boardId) {
+//    public Board listAllPostOfBoard(int boardId) {
+//        return boardDao.listAllPostsOfBoard(boardId);
+//    }
+    public List<Post> listAllPostOfBoard(int boardId) {
         return boardDao.listAllPostsOfBoard(boardId);
     }
 
