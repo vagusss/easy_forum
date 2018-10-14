@@ -21,6 +21,7 @@
 
     <!--静态资源访问-->
     <mvc:default-servlet-handler/>
+    <!--配置资源映射-->
     <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"/>
 
     <!--页面控制器-->

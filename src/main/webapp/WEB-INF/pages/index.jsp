@@ -3,10 +3,16 @@
 <html>
 <head>
     <title>easy_forum</title>
-    <link rel="stylesheet" href="../resources/css/material-icons.css">
+    <%--<link rel="stylesheet" href="../resources/css/material-icons.css">
     <link rel="stylesheet" href="../resources/css/material.min.css">
     <script type="text/javascript" src="../resources/js/material.min.js"></script>
-    <script type="text/javascript" src="../resources/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-3.1.1.min.js"></script>--%>
+
+    <%--因为在springmvc中配置了静态资源映射路径,所以可以按下面这样写--%>
+    <link rel="stylesheet" href="/resources/css/material-icons.css">
+    <link rel="stylesheet" href="/resources/css/material.min.css">
+    <script type="text/javascript" src="/resources/js/material.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-3.1.1.min.js"></script>
     <style>
         .center {
             margin-left: auto;
