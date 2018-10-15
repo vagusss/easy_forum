@@ -34,7 +34,7 @@ public class BoardController {
         PageHelper.startPage(pageNum,3);
 
         List<Post> posts = boardService.listAllPostOfBoard(boardId);
-        PageInfo<Post> pageInfo = new PageInfo<>(posts);
+        PageInfo<Post> pageInfo = new PageInfo<>(posts,4);
 
         request.setAttribute("pageInfo", pageInfo);
         request.setAttribute("boardId", boardId);
