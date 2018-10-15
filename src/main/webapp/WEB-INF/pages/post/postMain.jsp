@@ -95,7 +95,7 @@
 
     <%--分页模块--%>
     <nav aria-label="..." class="center">
-        <ul class="pagination">
+        <%--<ul class="pagination">
             <li class="page-item ">
                 <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.prePage}" tabindex="-1">Previous</a>
             </li>
@@ -115,6 +115,38 @@
             <li class="page-item">
                 <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.nextPage}">Next</a>
             </li>
+        </ul>--%>
+
+        <ul class="pagination">
+            <c:if test="${!pageInfo.isFirstPage}">
+                <li class="page-item ">
+                    <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.firstPage}">首页</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.prePage}">上一页</a>
+                </li>
+            </c:if>
+            <c:forEach items="${pageInfo.navigatepageNums}" var="navigatepageNum">
+
+                <c:if test="${navigatepageNum==pageInfo.pageNum}">
+                    <li class="page-item active">
+                        <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${navigatepageNum}">${navigatepageNum}</a>
+                    </li>
+                </c:if>
+                <c:if test="${navigatepageNum!=pageInfo.pageNum}">
+                    <li class="page-item ">
+                        <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${navigatepageNum}">${navigatepageNum}</a>
+                    </li>
+                </c:if>
+            </c:forEach>
+            <c:if test="${!pageInfo.isLastPage}">
+                <li class="page-item ">
+                    <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.nextPage}">下一页</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/board/listPosts-${boardId}?pageNum=${pageInfo.lastPage}">最后一页</a>
+                </li>
+            </c:if>
         </ul>
     </nav>
 

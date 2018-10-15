@@ -36,7 +36,6 @@ public class BoardController {
         List<Post> posts = boardService.listAllPostOfBoard(boardId);
         PageInfo<Post> pageInfo = new PageInfo<>(posts);
 
-
         request.setAttribute("pageInfo", pageInfo);
         request.setAttribute("boardId", boardId);
         return "post/postMain";
