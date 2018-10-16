@@ -1,5 +1,6 @@
 package forum.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import forum.domain.Board;
 import forum.domain.Post;
 import forum.domain.User;
@@ -43,7 +44,7 @@ public class AdminController {
 
     //论坛版块管理中心
     @RequestMapping(value = "/manageBoard")
-    public String manageBoard(HttpServletRequest request) {
+    public String manageBoard(HttpServletRequest request) throws JsonProcessingException {
         if (request.getSession().getAttribute("username").equals("admin")) {
             List<Board> boards = boardService.listAllBoard();
             request.setAttribute("boards", boards);

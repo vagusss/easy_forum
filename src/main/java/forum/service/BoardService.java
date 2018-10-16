@@ -1,5 +1,6 @@
 package forum.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import forum.domain.Board;
 import forum.domain.Post;
 
@@ -16,7 +17,7 @@ public interface BoardService {
 
 //获取所有板块
 
-    List<Board> listAllBoard();
+    List<Board> listAllBoard() throws JsonProcessingException;
 
 //获取指定板块的文章
 

@@ -32,10 +32,7 @@ public class MainController {
     //显示板块主页
     @RequestMapping("/main")
     public String mainPage(HttpServletRequest request) throws JsonProcessingException {
-//        PageHelper.startPage(2, 1);
         List<Board> boards = boardService.listAllBoard();
-//        PageInfo<Board> pageInfo = new PageInfo<>(boards);
-//        mapper.writeValueAsString(pageInfo);
         request.setAttribute("board", boards);
         return "mainPage";
     }
