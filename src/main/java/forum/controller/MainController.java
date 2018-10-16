@@ -2,12 +2,10 @@ package forum.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import forum.domain.Board;
 import forum.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +16,7 @@ import java.util.List;
 public class MainController {
     @Autowired
     private BoardService boardService;
+
 
 //    @Autowired
 //    ObjectMapper mapper;

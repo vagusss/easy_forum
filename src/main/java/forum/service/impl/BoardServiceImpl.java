@@ -7,9 +7,10 @@ import forum.dao.BoardDao;
 import forum.domain.Board;
 import forum.domain.Post;
 import forum.service.BoardService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -18,6 +19,15 @@ import java.util.List;
 @Service
 public class BoardServiceImpl implements BoardService {
     private final BoardDao boardDao;
+
+    @Value("${BOARD_SHOW}")
+    private String BOARD_SHOW;
+//
+//    @Value("${ALL_BOARD}")
+//    private String ALL_BOARD;
+
+    @Autowired
+    RabbitTemplate template;
 
     @Autowired
     private ObjectMapper mapper;
@@ -34,6 +44,9 @@ public class BoardServiceImpl implements BoardService {
     public void addBoardByBoard(Board board) {
         if (board != null) {
             boardDao.addBoard(board);
+
+            //增加板块后发消息到队列
+            template.convertAndSend("BOARD.INSERT","BOARD.INSERT"+board.getBoardId());
         }
     }
 
@@ -42,6 +55,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> listAllBoard() throws JsonProcessingException {
+        System.out.println(BOARD_SHOW);
         Jedis jedis = jedisPool.getResource();
         //先查询redis缓存
         try {
@@ -101,6 +115,9 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void updateBoardInfo(Board board) {
         boardDao.updateBoardByBoard(board);
+
+        //修改板块后发消息到队列
+        template.convertAndSend("BOARD.UPDATE","BOARD.UPDATE"+board.getBoardId());
     }
 
     @Override

@@ -56,7 +56,7 @@
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <input class="mdl-textfield__input" type="text" name="boardId"
                                                value="${boardId}"
-                                               id="boardId" readonly="readonly" name="boardId">
+                                               id="boardId" readonly="readonly">
                                         <label class="mdl-textfield__label" for="boardId"></label>
                                     </div>
                                 </td>
@@ -66,8 +66,7 @@
                                 <td>
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <input class="mdl-textfield__input" type="text" name="boardPostNum"
-                                               value="${boardPostNum}" id="boardPostNum" readonly="readonly"
-                                               name="boardPostNum">
+                                               value="${boardPostNum}" id="boardPostNum" readonly="readonly">
                                         <label class="mdl-textfield__label" for="boardPostNum"></label>
                                     </div>
                                 </td>
@@ -95,8 +94,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--pink-400 mdl-color-text--white"
-                                       href="/admin/updateBoard" type="submit" name="submit">修改</a>
+                                    <%--<a class="mdl-button mdl-js-button mdl-button--raised mdl-color--pink-400 mdl-color-text--white"
+                                       href="/admin/updateBoard" type="submit" name="submit">修改</a>--%>
+                                    <input class="mdl-button mdl-js-button mdl-button--raised" type="submit" value="修改">
                                 </td>
                                 <td>
                                     <a class="mdl-button mdl-js-button mdl-button--raised"

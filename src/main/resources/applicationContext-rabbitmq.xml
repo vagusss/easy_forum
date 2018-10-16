@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd">
+
+    <!-- 定义RabbitMQ连接工厂 -->
+    <rabbit:connection-factory id="connectionFactory" host="192.168.0.222" port="5672"
+                               username="admin" password="admin" virtual-host="/forum"/>
+    <!--创建template-->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
+                     exchange="boardExchange" />
+
+    <!--创建管理者-->
+    <rabbit:admin connection-factory="connectionFactory" />
+
+    <!--创建队列-->
+    <rabbit:queue name="boardQueueD" />
+    <rabbit:queue name="boardQueueU" />
+
+    <!--绑定交换机-->
+    <rabbit:topic-exchange name="boardExchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="boardQueueD" pattern="BOARD.INSERT" />
+            <rabbit:binding queue="boardQueueU" pattern="BOARD.UPDATE" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <!--创建消费者(监听者)-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="boardMqListener" method="listenD" queue-names="boardQueueD"  />
+    </rabbit:listener-container>
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="boardMqListener" method="listenU" queue-names="boardQueueU"  />
+    </rabbit:listener-container>
+
+    <bean id="boardMqListener" class="forum.rabbitmq.BoardMqListener" />
+
+
+
+</beans>

@@ -12,9 +12,6 @@
 
     <!--扫描控制器-->
     <context:component-scan base-package="forum.controller"/>
-    <context:component-scan base-package="forum.dao"/>
-    <context:component-scan base-package="forum.domain"/>
-    <context:component-scan base-package="forum.service"/>
 
     <!--开启注解,校验器的注入-->
     <mvc:annotation-driven validator="validator"/>

@@ -67,7 +67,7 @@ public class AdminController {
 
     //修改板块信息
     @RequestMapping(value = "updateBoard", method = RequestMethod.POST)
-    public String updateBoard(Board board, HttpServletRequest request) {
+    public String updateBoard(Board board) {
         if (board != null) {
             boardService.updateBoardInfo(board);
             // 成功更新数据后跳转页面
