@@ -23,8 +23,8 @@ public class BoardServiceImpl implements BoardService {
     @Value("${BOARD_SHOW}")
     private String BOARD_SHOW;
 //
-//    @Value("${ALL_BOARD}")
-//    private String ALL_BOARD;
+    @Value("${ALL_BOARD}")
+    private String ALL_BOARD;
 
     @Autowired
     RabbitTemplate template;
@@ -55,12 +55,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> listAllBoard() throws JsonProcessingException {
-        System.out.println(BOARD_SHOW);
+//        System.out.println(BOARD_SHOW);
         Jedis jedis = jedisPool.getResource();
         //先查询redis缓存
         try {
             System.out.println("查缓存");
-            String json = jedis.hget("board_show", "all_board");
+            String json = jedis.hget(BOARD_SHOW, ALL_BOARD);
             if (json != null && json.length()>0){
                 JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class,Board.class);
                 List<Board> boards = mapper.readValue(json, javaType);
@@ -78,8 +78,8 @@ public class BoardServiceImpl implements BoardService {
         //把结果添加到缓存
         try {
             System.out.println("写缓存");
-            jedis.hset("board_show","all_board",mapper.writeValueAsString(boards));
-            jedis.expire("board_show",1800);
+            jedis.hset(BOARD_SHOW,ALL_BOARD,mapper.writeValueAsString(boards));
+            jedis.expire(BOARD_SHOW,1800);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
