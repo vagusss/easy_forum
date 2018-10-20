@@ -52,7 +52,7 @@
         <property name="mapperLocations" value="classpath*:forum/mapper/*.xml"/>
     </bean>
 
-    <!--创建数据映射器-->
+    <!--创建数据映射器/mapper接口扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="forum.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>

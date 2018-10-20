@@ -11,17 +11,20 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--扫描控制器-->
-    <context:component-scan base-package="forum.controller"/>
+    <!--<context:component-scan base-package="forum.controller"/>-->
+    <context:component-scan base-package="forum" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--开启注解,校验器的注入-->
-    <mvc:annotation-driven validator="validator"/>
+    <mvc:annotation-driven validator="validator" />
 
     <!--静态资源访问-->
-    <mvc:default-servlet-handler/>
-    <!--配置资源映射-->
+    <!--<mvc:default-servlet-handler/>-->
+    <!--配置资源映射/防止静态资源被拦截/和上面的配置二选一即可-->
     <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"/>
 
-    <!--页面控制器-->
+    <!--页面控制器/视图解析-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
